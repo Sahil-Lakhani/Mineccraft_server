@@ -4,7 +4,7 @@ This repository contains the setup instructions for running a Minecraft server (
 
 ## 1. Prerequisites
 
-* A computer with **macOS** or **Linux**
+* A computer with **Windows**, **macOS**, or **Linux**
 * **Java 21 or above** installed
 * **Ngrok account** (free or paid)
 * **Python 3** installed
@@ -19,19 +19,34 @@ This repository contains the setup instructions for running a Minecraft server (
 
 ### 2.2 Initial Server Setup
 
-1. Open a terminal and navigate to the server folder:
+1. Open a terminal/command prompt and navigate to the server folder:
 
 ```bash
+# Windows
+cd C:\path\to\minecraft-server
+
+# macOS/Linux
 cd path/to/minecraft-server
 ```
 
 2. Run the server for the first time:
 
 ```bash
+# Windows
+java -Xmx12G -Xms12G -jar minecraft_server.1.21.4.jar nogui
+
+# macOS/Linux
 java -Xmx12G -Xms12G -jar minecraft_server.1.21.4.jar nogui
 ```
 
-3. The server will generate some files and then stop. Open `eula.txt`, change `eula=false` to `eula=true`, and save the file.
+3. The server will generate configuration files and then stop. You'll need to modify two files:
+
+   **In `eula.txt`:**
+   * Change `eula=false` to `eula=true`
+
+   **In `server.properties`:**
+   * Find the line `online-mode=true`
+   * Change it to `online-mode=false` (This allows players with cracked clients to join)
 
 4. Start the server again:
 
@@ -43,10 +58,42 @@ java -Xmx12G -Xms12G -jar minecraft_server.1.21.4.jar nogui
 
 ### 3.1 Install Ngrok
 
-If you haven't installed Ngrok yet, use Homebrew:
+Choose your operating system:
 
+**Windows:**
+1. Download the Windows installer from [Ngrok's download page](https://ngrok.com/download)
+2. Run the installer
+   
+   OR using PowerShell:
+```powershell
+# Using Chocolatey
+choco install ngrok
+
+# Using Scoop
+scoop install ngrok
+```
+
+**macOS:**
 ```bash
+# Using Homebrew
 brew install ngrok/ngrok/ngrok
+
+# Using MacPorts
+sudo port install ngrok
+```
+
+**Linux:**
+```bash
+# Using Snap
+snap install ngrok
+
+# Using apt (Debian/Ubuntu)
+curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+
+# Direct download and install
+wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-stable-linux-amd64.tgz
+tar xvzf ngrok-stable-linux-amd64.tgz
+sudo mv ngrok /usr/local/bin
 ```
 
 ### 3.2 Authenticate Ngrok
@@ -70,6 +117,10 @@ After setting up your Ngrok account, **run the Python script** included in this 
 Run the script:
 
 ```bash
+# Windows
+python start_server.py
+
+# macOS/Linux
 python3 start_server.py
 ```
 
@@ -82,8 +133,9 @@ python3 start_server.py
 
 ## 5. Notes
 
-* Ensure your firewall allows connections to Minecraft.
-* The server runs in **offline mode** by default.
-* You can modify `server.properties` for additional configurations.
+* Ensure your firewall allows connections to Minecraft (default port is 25565).
+* The server runs in **offline mode** by default (allows cracked clients).
+* You can modify other settings in `server.properties` for additional configurations.
+* For better performance, adjust the `-Xmx` and `-Xms` values in the Java command based on your available RAM.
 
 Enjoy your multiplayer Minecraft server! 🎮
