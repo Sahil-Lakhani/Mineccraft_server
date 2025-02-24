@@ -2,6 +2,10 @@
 
 This repository contains the setup instructions for running a Minecraft server (version 1.21.4) using Ngrok for easy multiplayer access.
 
+⭐ Support the Project!
+
+If you found this project helpful, please consider starring this repository on GitHub! ⭐ It helps others discover this project and keeps me motivated to improve it. Thank you for your support! 💖
+
 ## 1. Prerequisites
 
 * A computer with **Windows**, **macOS**, or **Linux**
